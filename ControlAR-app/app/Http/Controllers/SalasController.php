@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use App\Models\salas;
+
+//isso esta funcionando baseado em testes com o postman
 
 class SalasController extends Controller
 {
@@ -19,9 +24,16 @@ class SalasController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $data = $request-> validate([
+            'nome_sala' => 'required',
+            'qtd_ac' => 'required',
+        ]);
 
+        salas::create($data);
+
+        return response()->json($data, 201);
+    }
+    
     /**
      * Display the specified resource.
      */
