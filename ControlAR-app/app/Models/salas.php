@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
 
 class salas extends Model
 {
@@ -12,4 +14,7 @@ class salas extends Model
         'qtd_ac',
     ];
 
+    public function users(): BelongsTo{
+        return $this->belongsTo(User::class);
+    }
 }

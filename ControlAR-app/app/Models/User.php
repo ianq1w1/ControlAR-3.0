@@ -8,6 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
+use App\Models\salas;
+
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -49,4 +55,9 @@ class User extends Authenticatable
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+
+    public function salasUser(): HasMany{
+        return $this ->hasMany(salas::class, 'sala_user_id', "id");
+    }
+
 }
