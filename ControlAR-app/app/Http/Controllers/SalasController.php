@@ -9,6 +9,7 @@ use App\Models\salas;
 use App\Models\User;
 
 //isso esta funcionando baseado em testes com o postman
+//tinker tb pra testar as relações com autenticação
 
 class SalasController extends Controller
 {

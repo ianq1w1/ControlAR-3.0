@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome_sala');
             $table->string('qtd_ac');
-            $table->foreignId('sala_user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('sala_user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
