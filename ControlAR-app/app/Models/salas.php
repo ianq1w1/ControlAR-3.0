@@ -12,9 +12,10 @@ class salas extends Model
     protected $fillable = [
         'nome_sala',
         'qtd_ac',
+        'sala_user_id'
     ];
 
-    public function users(): BelongsTo{
-        return $this->belongsTo(User::class);
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class, 'sala_user_id');
     }
 }

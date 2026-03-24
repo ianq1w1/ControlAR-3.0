@@ -11,5 +11,16 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('salas', [SalasController::class, 'store']);
+//Route::post('/salas', [SalasController::class, 'store']);
+
+
+
+
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/salas', [SalasController::class, 'store']);
+    Route::get('/users/{user}/salas', [SalasController::class, 'salasPorUser']); 
+    Route::get('/salas/{sala}/user', [SalasController::class, 'user']);
+});
 

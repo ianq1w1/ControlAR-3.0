@@ -56,8 +56,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function salasUser(): HasMany{
-        return $this ->hasMany(salas::class, 'sala_user_id', "id");
+    public function salas(): HasMany{
+        return $this ->hasMany(salas::class, 'sala_user_id');
     }
 
 }

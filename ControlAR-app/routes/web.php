@@ -15,5 +15,6 @@ Route::get('dashboard', function () {
     return Inertia::render('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('salas', [SalasController::class, 'store']);
+
+//Route::post('salas', [SalasController::class, 'store']);
 require __DIR__.'/settings.php';

@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\salas;
+use App\Models\User;
 
 //isso esta funcionando baseado em testes com o postman
 
@@ -24,14 +25,16 @@ class SalasController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request-> validate([
-            'nome_sala' => 'required',
-            'qtd_ac' => 'required',
+        $data = $request->validate([
+            'nome_sala' => 'required|string',
+            'qtd_ac'    => 'required|string',
         ]);
 
-        salas::create($data);
+        // O segredo está aqui: pegamos o usuário logado e criamos a sala através da relação
+        // Isso injeta automaticamente o user_id correto no banco
+        $sala = $request->user()->salas()->create($data);
 
-        return response()->json($data, 201);
+        return response()->json($sala, 201);
     }
     
     /**
@@ -57,4 +60,22 @@ class SalasController extends Controller
     {
         //
     }
+
+    public function user(Salas $sala)
+    {
+        return response()->json([
+            'sala' => $sala,
+            'user' => $sala->user // relação definida no Model Salas
+        ]);
+    }
+
+    public function salasPorUser(User $user)
+    {
+        return response()->json([
+            'user' => $user,
+            'salas' => $user->salas // relação definida no Model User
+        ]);
+    }
+
+
 }
