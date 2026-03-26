@@ -27,7 +27,13 @@ class Dispositivo extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'address' => 'required|string',
+            'device_AC_id' => 'required|integer|exists:ar_condicionados,id' // Verifica se o ID existe na tabela 'salas'
+        ]);
+    
+        \App\Models\Dispositivo::create($data);
+
     }
 
     /**
