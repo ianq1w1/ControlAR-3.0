@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\salas;
+use App\Models\Dispositivo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ArCondicionado extends Model
 {
@@ -17,4 +19,7 @@ class ArCondicionado extends Model
         return $this->belongsTo(salas::class, 'AC_sala_id');
     }
 
+    public function deviceAC(): HasOne{
+        return $this->hasOne(Dispositivo::class, 'device_AC_id');
+    }
 }

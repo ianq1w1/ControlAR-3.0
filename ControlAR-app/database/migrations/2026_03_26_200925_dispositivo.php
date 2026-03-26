@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('dispositivos', function (Blueprint $table) {
+        $table->id();
+        $table->string('Address');
+        $table->foreignId('device_AC_id')->constrained('ar_condicionados')->onDelete('cascade');
+        $table->timestamps();
+        });
     }
 
     /**
